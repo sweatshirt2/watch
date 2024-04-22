@@ -1,10 +1,11 @@
 import { FC, useEffect, useRef, useState } from 'react'
+import '../index.css'
 
 const Stopwatch: FC = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [elapses, setElapses] = useState(['']);
   const [ time_run, setTimeRun ] = useState('00:00:00');
-  const intervalID:any = useRef(null);
+  const intervalID: any = useRef();
 
   useEffect(() => {
     let millis = parseInt(time_run.slice(6));
@@ -59,7 +60,7 @@ const Stopwatch: FC = () => {
   return (
     <div>
       <h1>Stopwatch</h1>
-      <h1>{time_run}</h1>
+      <h2>{time_run}</h2>
       <div>
         <button onClick={start}>Start</button>
         <button onClick={stop}>Stop</button>
@@ -67,8 +68,8 @@ const Stopwatch: FC = () => {
         <button onClick={reset}>Reset</button>
       </div>
       {
-        elapses.map(elapse => (
-          <h2> {elapse} </h2>
+        elapses.map((elapse, i) => (
+          <h4 key={`stopwatch-button${i}`}> {elapse} </h4>
         ))
       }
     </div>
