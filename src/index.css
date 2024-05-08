@@ -13,6 +13,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+#title{
+  position: relative;
+  left: -15em;
+  display: inline;
+}
+#logout{
+  position: relative;
+  left: -15em;
+  display: inline;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -67,6 +78,47 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+.calendar{
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-top: 40px;
+}
+.calendar-container{
+  position: relative;
+}
+.calendar-month{
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  width: 100%;
+  background-color: #a9adf8;
+}
+h5{
+  font-size: 20px;
+  margin: 0;
+  padding: 0 0 3px 3px;
+}
+.calendar-days{
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background-color: #e7e8ff;
+}
+.swipe-month-btn{
+  margin: 0 5px;
+  position: relative;
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#today{
+  font-weight: bold;
+  background-color: #dddeec;
+  border-radius: 15px;
 }
 
 @media (prefers-color-scheme: light) {

@@ -1,11 +1,17 @@
 import { FC, useEffect, useRef, useState } from 'react'
 import '../index.css'
+import { useUser } from '../contexts/UserContext';
 
 const Stopwatch: FC = () => {
+  const [mssg, setMssg] = useState('');
+  const [hasStarted, setHasStarted] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
   const [elapses, setElapses] = useState(['']);
   const [ time_run, setTimeRun ] = useState('00:00:00');
   const intervalID: any = useRef();
+  const total_elapse: any = useRef(3);
+
+  const { user } = useUser();
 
   useEffect(() => {
     let millis = parseInt(time_run.slice(6));
@@ -33,26 +39,40 @@ const Stopwatch: FC = () => {
         const mins: string = minutes < 10 ? '0'+ minutes: ''+ minutes;
 
         setTimeRun(mins +':'+ secs + ':' + mills);
-    }, 10)}
+    }, 8)} // updated from 10 millis to 8 bacause of processor delay
     return () => clearInterval(intervalID.current);
   
-  }, [isRunning])
+  }, [isRunning]);
 
   function start() {
     setIsRunning(true);
-    
+    setHasStarted(true);
+    setMssg('');
   }
 
   function elapse() {
-    setElapses([...elapses, time_run])
+    if (!isRunning) {
+      setMssg('Stopwatch not running');
+      return;
+    }
+    if (user || (total_elapse.current > 0)) {
+      total_elapse.current -= 1;
+      setMssg('');
+      setElapses([...elapses, time_run]);
+    } else {
+      setMssg('Please log in to use this feature more than three times');
+    }
   }
 
   function stop() {
+    setMssg('');
     setIsRunning(false);
   }
 
   function reset() {
+    total_elapse.current = 3
     stop();
+    setHasStarted(false);
     setTimeRun('00:00:00');
     setElapses(['']);
   }
@@ -62,11 +82,12 @@ const Stopwatch: FC = () => {
       <h1>Stopwatch</h1>
       <h2>{time_run}</h2>
       <div>
-        <button onClick={start}>Start</button>
-        <button onClick={stop}>Stop</button>
-        <button onClick={elapse}>Ellapse</button>
-        <button onClick={reset}>Reset</button>
+        { isRunning || <button onClick={start}>Start</button> }
+        { isRunning && <button onClick={stop}>Stop</button> }
+        { isRunning && <button onClick={elapse}>Ellapse</button>}
+        { hasStarted && <button onClick={reset}>Reset</button> }
       </div>
+      <p>{mssg}</p>
       {
         elapses.map((elapse, i) => (
           <h4 key={`stopwatch-button${i}`}> {elapse} </h4>

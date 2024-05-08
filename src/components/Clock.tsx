@@ -22,7 +22,7 @@ const Clock: FC = () => {
             
       if (hourformat12) {
         if (parseInt(hr) > 11) {
-          hr = parseInt(hr) + '';
+          hr = parseInt(hr) - 12 + '';
           setCurrentTime(hr + ':' + min + ':' + sec + ' PM');
         } else {
           setCurrentTime(hr + ':' + min + ':' + sec + ' AM');
@@ -31,7 +31,7 @@ const Clock: FC = () => {
         setCurrentTime(hr + ':' + min + ':' + sec);
       }
             
-    }, 1000);
+    }, 100);
 
     return (() => {
       clearInterval(intervalID.current);
