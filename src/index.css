@@ -117,7 +117,7 @@ h5{
 }
 #today{
   font-weight: bold;
-  background-color: #dddeec;
+  background-color: #b7bae7;
   border-radius: 15px;
 }
 
@@ -132,4 +132,7 @@ h5{
   button {
     background-color: #f9f9f9;
   }
+}
+.empty-day {
+  opacity: .4;
 }

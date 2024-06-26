@@ -40,6 +40,7 @@ const Stopwatch: FC = () => {
 
         setTimeRun(mins +':'+ secs + ':' + mills);
     }, 8)} // updated from 10 millis to 8 bacause of processor delay
+    
     return () => clearInterval(intervalID.current);
   
   }, [isRunning]);
