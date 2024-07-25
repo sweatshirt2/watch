@@ -8,7 +8,7 @@ import { UsersProvider } from './contexts/UsersContext'
 import Home from './Home'
 
 function App() {
-  
+
 
   return (
     <UserProvider>
@@ -16,7 +16,7 @@ function App() {
         <Home />
         <Calendar />
         <Clock />
-        <Stopwatch />      
+        <Stopwatch />
       </UsersProvider>
     </UserProvider>
   )

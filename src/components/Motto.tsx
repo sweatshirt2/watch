@@ -13,7 +13,7 @@ interface Action {
 const prev_mottos: Motto[] = [];
 
 function changeMotto(state:Motto , action:Action) {
-    prev_mottos.push(state);   
+    prev_mottos.push(state);
     console.log(prev_mottos);
     return  {
         title: action.payload.title,
@@ -41,7 +41,7 @@ const Motto:FC = () => {
                 <input type="text" id="motto" placeholder="your motto title"/>
                 <input type="text" id="feeling" placeholder="feeling"/>
                 <button onClick={() => {
-                    dispatch({ 
+                    dispatch({
                         type: '',
                         payload: {
                         title: (document.getElementById('motto')! as HTMLInputElement).value,

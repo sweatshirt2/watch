@@ -8,8 +8,8 @@ const Stopwatch: FC = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [elapses, setElapses] = useState(['']);
   const [ time_run, setTimeRun ] = useState('00:00:00');
-  const intervalID: any = useRef();
-  const total_elapse: any = useRef(3);
+  const intervalID = useRef<number>();
+  const total_elapse = useRef<number>(3);
 
   const { user } = useUser();
 
@@ -17,7 +17,7 @@ const Stopwatch: FC = () => {
     let millis = parseInt(time_run.slice(6));
     let seconds = parseInt(time_run.slice(3,5));
     let minutes = parseInt(time_run.slice(0,2));
-    
+
     if (isRunning) {
       intervalID.current = setInterval(() => {
         millis += 1
@@ -34,9 +34,9 @@ const Stopwatch: FC = () => {
         if (minutes === 60) {
           minutes = 0;
         }
-        const mills: string = millis < 10 ? '0'+ millis: ''+ millis;
-        const secs: string = seconds < 10 ? '0'+ seconds: ''+ seconds;
-        const mins: string = minutes < 10 ? '0'+ minutes: ''+ minutes;
+        const mills: string = millis < 10 ? '0'+ millis: '' + millis;
+        const secs: string = seconds < 10 ? '0'+ seconds: '' + seconds;
+        const mins: string = minutes < 10 ? '0'+ minutes: '' + minutes;
 
         setTimeRun(mins +':'+ secs + ':' + mills);
     }, 8)} // updated from 10 millis to 8 bacause of processor delay
